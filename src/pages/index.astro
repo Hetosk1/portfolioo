@@ -1,0 +1,382 @@
+---
+import Base from '../layouts/Base.astro';
+
+// stamped at build time, so it is only ever as true as the last deploy
+const buildTime = new Date();
+const deployed = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'Asia/Kolkata',
+}).format(buildTime);
+
+const built = [
+  {
+    name: 'Servy',
+    href: 'https://github.com/Hetosk1/servy',
+    note: 'A reverse proxy, load balancer and static server in Go. I wanted to know what happens to the bytes.',
+    stack: 'go · linux · systemd',
+  },
+  {
+    name: 'Incident engine',
+    href: 'https://github.com/Hetosk1/incident-management-system',
+    note: 'Listens to 10,000 failure signals a second over UDP, quiets the duplicates, keeps an immutable record of the rest.',
+    stack: 'node · redis · influxdb · postgres',
+  },
+  {
+    name: 'AWS, in Terraform',
+    href: 'https://github.com/Hetosk1/Multi-Environment-Infrastructure',
+    note: 'A multi-AZ environment with Kafka, Redis and DocumentDB. Nothing clicked in a console.',
+    stack: 'terraform · aws · msk',
+  },
+  {
+    name: 'temple',
+    href: 'https://github.com/Hetosk1/temple',
+    note: 'A key-value store in C++, written from scratch.',
+    stack: 'c++',
+  },
+  {
+    name: 'TenderFlow',
+    href: 'https://github.com/Hetosk1/tenderflow',
+    note: 'Role-based access and an auditable state machine for B2B tenders.',
+    stack: 'typescript · mongodb · redis · docker',
+  },
+];
+---
+
+<Base
+  title="Het Jasani"
+  description="Software engineer in Pune. I build things end to end, and stay with them after they ship."
+>
+  <div class="page">
+    <header class="row top">
+      <a class="name" href="/">Het Jasani</a>
+      <div class="content where meta">
+        <span class="coords">18.52° N, 73.86° E</span>
+        <span class="clock" data-clock aria-hidden="true"></span>
+        <button class="theme" type="button" data-theme-toggle aria-label="Switch colour theme">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.25"></circle>
+            <path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="row hero">
+        <span class="content">
+          Software engineer in Pune. I build things <em>end to end</em>, and stay with them after they ship.
+        </span>
+      </h1>
+
+      <section class="row section" aria-labelledby="now">
+        <h2 class="label" id="now">Now</h2>
+        <div class="content prose">
+          <p>
+            I'm interning at <a class="company" href="https://www.bajajfinservhealth.in">Bajaj Finserv Health Limited</a>, where I own five production services. One of them is
+            the storage layer — the place every prescription, lab report and claim on the platform ends
+            up. Around <span class="num">209,000</span> uploads an hour, around the clock.
+          </p>
+          <p>
+            I inherited it running five different ways for five different teams. It runs one way now.
+            Every upload is authenticated, scoped and audited, and when something goes wrong,
+            I get <em>the first call</em>.
+          </p>
+          <p class="muted">
+            I don't really have a layer. Frontend, backend, the pipeline, the pod — wherever the problem
+            is, I try to understand it the way someone who has lived there for years would.
+          </p>
+        </div>
+      </section>
+
+      <section class="row section" aria-labelledby="engineering">
+        <h2 class="label" id="engineering">On engineering</h2>
+        <p class="content statement">
+          Engineering is closer to <em>philosophy</em> than most people admit. There are perfect ideas,
+          but never a perfect implementation — so you think, you build, it breaks, and you build again.
+        </p>
+      </section>
+
+      <section class="row section" aria-labelledby="built">
+        <h2 class="label" id="built">Built to understand</h2>
+        <ul class="content built">
+          {
+            built.map((p) => (
+              <li>
+                <a class="title" href={p.href}>
+                  {p.name}
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </a>
+                <p class="muted">{p.note}</p>
+                <p class="meta stack">{p.stack}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="more">
+          <a href="https://github.com/Hetosk1">More on GitHub <span class="arrow" aria-hidden="true">→</span></a>
+        </p>
+      </section>
+
+      <section class="row section" aria-labelledby="off">
+        <h2 class="label" id="off">Off the clock</h2>
+        <div class="content prose">
+          <p>
+            Mostly books about ships — marine engines, navigation, and how large machines
+            stay reliable <em>at sea</em>.
+          </p>
+          <p class="muted">
+            Jamnagar, then Pune. A diploma in computer engineering, now a B.Tech at Symbiosis. Before
+            this, backend work for a studio in Dubai, remotely.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="row section foot">
+      <h2 class="label">Write</h2>
+      <div class="content">
+        <a class="email" href="mailto:hetjasani2709@gmail.com">hetjasani2709@gmail.com</a>
+        <p class="phone"><a href="tel:+919327182403">+91 93271 82403</a></p>
+        <p class="links">
+          <a href="https://github.com/Hetosk1">GitHub</a>
+          <a href="https://www.linkedin.com/in/het-jasani-3b16b6254">LinkedIn</a>
+          <a href="/het-jasani-resume.pdf">Résumé</a>
+        </p>
+        <p class="colophon meta">
+          <span class="status">
+            <span class="dot" aria-hidden="true"></span>last deployed <time datetime={buildTime.toISOString()}>{deployed}</time>
+          </span>
+          <span>built with astro</span>
+        </p>
+      </div>
+    </footer>
+  </div>
+</Base>
+
+<script>
+  const el = document.querySelector<HTMLElement>('[data-clock]');
+  if (el) {
+    const fmt = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Asia/Kolkata',
+    });
+    const tick = () => (el.textContent = `${fmt.format(new Date())} IST`);
+    tick();
+    setInterval(tick, 15_000);
+  }
+
+  const root = document.documentElement;
+  document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+    const current =
+      root.dataset.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+  });
+</script>
+
+<style>
+  .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.625rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .where {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  .clock:not(:empty)::before {
+    content: '·';
+    margin-right: 0.75rem;
+  }
+
+  .theme {
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: -0.375rem -0.375rem -0.375rem 0.25rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition:
+      color 200ms ease,
+      transform 300ms ease;
+  }
+
+  .theme:hover {
+    color: var(--text);
+    transform: rotate(180deg);
+  }
+
+  .theme:focus-visible {
+    outline: 1.5px solid var(--text);
+    outline-offset: 2px;
+  }
+
+  .hero {
+    margin-top: 10rem;
+    font-size: clamp(1.875rem, 1.25rem + 2.4vw, 2.625rem);
+    line-height: 1.14;
+    font-weight: 500;
+    letter-spacing: -0.032em;
+    text-wrap: balance;
+  }
+
+  .prose p + p {
+    margin-top: 1.1em;
+  }
+
+  .company {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.08em;
+    letter-spacing: -0.005em;
+  }
+
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .statement {
+    font-size: clamp(1.1875rem, 1rem + 0.6vw, 1.375rem);
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+
+  .built li + li {
+    margin-top: 2rem;
+  }
+
+  .title {
+    font-weight: 550;
+    text-decoration: none;
+  }
+
+  .arrow {
+    display: inline-block;
+    margin-left: 0.2rem;
+    font-size: 0.8em;
+    color: var(--faint);
+    transition:
+      transform 200ms ease,
+      color 200ms ease;
+  }
+
+  .title:hover .arrow {
+    color: var(--text);
+    transform: translate(2px, -2px);
+  }
+
+  .more {
+    margin-top: 2.5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .more a {
+    text-decoration: none;
+  }
+
+  .more a:hover .arrow {
+    color: var(--text);
+    transform: translateX(3px);
+  }
+
+  .stack {
+    margin-top: 0.35rem;
+    color: var(--faint);
+  }
+
+  .foot {
+    padding-top: 3rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .foot .label {
+    font-weight: inherit;
+  }
+
+  .email {
+    font-size: clamp(1.375rem, 1.1rem + 1.2vw, 1.75rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  .phone {
+    margin-top: 0.5rem;
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .links {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .colophon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    margin-top: 4.5rem;
+    color: var(--faint);
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+
+  @media (max-width: 720px) {
+    .coords {
+      display: none;
+    }
+
+    .clock::before {
+      display: none;
+    }
+
+    .hero {
+      margin-top: 6rem;
+    }
+  }
+</style>
