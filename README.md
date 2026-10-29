@@ -1,4 +1,4 @@
-# hetjasani.in
+# hetjasani.site
 
 Personal site. Astro, one page, no client framework.
 
